@@ -70,4 +70,11 @@ ssgsea_results = gp.ssgsea(
     no_plot=True             # Skips saving plot files to save memory/time
 )
 ssgsea_long = ssgsea_results.res2d
-ssgsea_long.to_csv("ssgsea_scores.csv", index=False)
+ssgsea_long.to_csv("ssgsea_long.csv", index=False) #original format.
+ssgsea_wide = ssgsea_long.pivot(
+    index="Name",
+    columns="Term",
+    values="NES",
+).reset_index()
+
+ssgsea_wide.to_csv("ssgsea_scores.csv", index=False) #need to convert it to wide
